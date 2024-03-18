@@ -1,15 +1,5 @@
 version: '3.3'
 services:
-  mongodb:
-    image : mongo
-    container_name: mongodb
-    volumes:
-      - ./database:/data/db
-    ports:
-      - 27017:27017
-    networks:
-      - nesjs-network
-    restart: always
   reservations-gateway:
     container_name: gateway-container
     image: kushalgaur123/reservations-gateway:latest
@@ -21,10 +11,9 @@ services:
       - .env
     ports:
       - 3005:3005
+      - 3000:3000
     networks:
       - nesjs-network
-    depends_on:
-      - mongodb
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

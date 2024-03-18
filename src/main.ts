@@ -8,13 +8,17 @@ import { setApp } from './app';
 import helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create(GatewayModule);
+  const app = await NestFactory.create(GatewayModule, { cors: true });
   const configService = app.get(ConfigService);
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useLogger(app.get(Logger));
   app.enableCors({
-    origin: configService.get('RESERVATIONS_GRAPHQL_URL'),
+    origin: [
+      'http://localhost:3005',
+      'http://52.54.163.134:3005',
+      'http://http://3.91.234.188:3000',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
     credentials: true,
