@@ -13,7 +13,12 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useLogger(app.get(Logger));
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://52.54.163.134:3005',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
+    credentials: true,
+  });
   await app.listen(configService.get('GATEWAY_HTTP_PORT'));
   setApp(app);
   app.use(
