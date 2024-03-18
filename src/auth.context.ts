@@ -7,7 +7,7 @@ import { AUTH_SERVICE } from '@app/common';
 export const authContext = async ({ res }) => {
   try {
     const authClient = app.get<ClientProxy>(AUTH_SERVICE);
-    return authClient.send('authenticate', {
+    return authClient.send('validateToken', {
       Authentication: res.headers?.authentication,
     });
   } catch (err) {

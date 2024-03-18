@@ -10,9 +10,9 @@ services:
     networks:
       - nesjs-network
     restart: always
-  gateway:
+  reservations-gateway:
     container_name: gateway-container
-    image: kushalgaur123/gateway:latest
+    image: kushalgaur123/reservations-gateway:latest
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -20,7 +20,7 @@ services:
     env_file:
       - .env
     ports:
-      - '3005:3005'
+      - 3005:3005
     networks:
       - nesjs-network
     depends_on:
